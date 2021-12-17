@@ -1,17 +1,18 @@
 let id="no";
+//localStorage.clear();
 selectData();
 function manageData(){
-	document.getElementById('msg').innerHTML=""; 
+	document.getElementById('msg').innerHTML="";
 	let name=document.getElementById('name').value;
 	if(name==''){
 		document.getElementById('msg').innerHTML='Please enter your name';
 	}else{
-		// console.log(id);
+		console.log(id);
 		if(id=='no'){
-			let arr=getCrudData();  //Check data available or not in local storage	
-			if(arr==null){    
-				let data=[name];  
-				setCrudData(data); // add data in localstorage
+			let arr=getCrudData();
+			if(arr==null){
+				let data=[name];
+				setCrudData(data);
 			}else{
 				arr.push(name);
 				setCrudData(arr);
@@ -41,17 +42,20 @@ function selectData(){
 		
 	}
 }
+
 function editData(rid){
 	id=rid;
 	let arr=getCrudData();
 	document.getElementById('name').value=arr[rid];
 }
+
 function deleteData(rid){
 	let arr=getCrudData();
 	arr.splice(rid,1);
 	setCrudData(arr);
 	selectData();
 }
+
 function getCrudData(){
 	let arr=JSON.parse(localStorage.getItem('crud'));
 	return arr;
